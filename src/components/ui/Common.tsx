@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, AlertTriangle, CheckCircle, Info } from 'lucide-react';
+import { eachDayOfInterval } from 'date-fns';
 
 interface ConfirmDialogProps {
   isOpen: boolean;
@@ -147,11 +148,6 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 24, color
     animation: 'spin 0.7s linear infinite',
   }} />
 );
-
-// Inject spin keyframe
-const spinStyle = document.createElement('style');
-spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-document.head.appendChild(spinStyle);
 
 interface PageLoaderProps {
   message?: string;
