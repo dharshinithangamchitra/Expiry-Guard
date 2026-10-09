@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-teal-primary: #0F766E;
   --color-teal-dark: #0D5F58;
   --color-teal-light: #14B8A6;
