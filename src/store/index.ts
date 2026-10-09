@@ -134,6 +134,8 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
+        products: state.products,
+        notifications: state.notifications,
         theme: state.theme,
         language: state.language,
         sidebarOpen: state.sidebarOpen,

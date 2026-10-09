@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useAppStore, Product } from './store';
-import { MOCK_PRODUCTS, MOCK_USER, MOCK_NOTIFICATIONS } from './data/mockData';
+import { MOCK_PRODUCTS, MOCK_NOTIFICATIONS } from './data/mockData';
 import { Sidebar } from './components/layout/Sidebar';
 import { TopBar } from './components/layout/TopBar';
 import { BottomNav } from './components/layout/BottomNav';
+import { AuthPage } from './components/auth/AuthPage';
 
 // Pages
 import { Dashboard } from './components/pages/Dashboard';
@@ -19,7 +20,7 @@ import { SettingsPage } from './components/pages/SettingsPage';
 export const App: React.FC = () => {
   const {
     user,
-    setUser,
+    isAuthenticated,
     products,
     setProducts,
     notifications,
@@ -32,11 +33,8 @@ export const App: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
-  // Initialize demo data if store is empty
+  // Initialize mock products if empty
   useEffect(() => {
-    if (!user) {
-      setUser(MOCK_USER);
-    }
     if (products.length === 0) {
       setProducts(MOCK_PRODUCTS);
     }
@@ -44,6 +42,29 @@ export const App: React.FC = () => {
       setNotifications(MOCK_NOTIFICATIONS);
     }
   }, []);
+
+  // Display Login / Register screen first when user is not authenticated
+  if (!isAuthenticated || !user) {
+    return (
+      <>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3500,
+            style: {
+              background: '#0F172A',
+              color: '#FFFFFF',
+              fontSize: '0.875rem',
+              borderRadius: '12px',
+              padding: '12px 18px',
+              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.2)',
+            },
+          }}
+        />
+        <AuthPage />
+      </>
+    );
+  }
 
   const handlePageChange = (page: string) => {
     if (page === 'add-product') {
